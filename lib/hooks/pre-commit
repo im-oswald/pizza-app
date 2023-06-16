@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Run RuboCop
+rubocop --fail-fast
+
+# Capture the exit code of the last command
+exit_code=$?
+
+# If RuboCop failed, prevent the commit
+if [ $exit_code -ne 0 ]; then
+  echo "RuboCop failed. Commit aborted."
+  exit $exit_code
+fi
