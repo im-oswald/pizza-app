@@ -1,7 +1,10 @@
 #!/bin/sh
 
-# Run RuboCop
-rubocop --fail-fast
+# Retrieve the list of staged files
+files=$(git diff --name-only --cached)
+
+# Run RuboCop on the staged files
+rubocop ${files[@]} --fail-fast
 
 # Capture the exit code of the last command
 exit_code=$?

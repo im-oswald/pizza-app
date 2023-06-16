@@ -1,6 +1,7 @@
-require: 
+require:
 - rubocop-rails
 AllCops:
+  SuggestExtensions: false
   NewCops: enable
   Exclude:
   - bin/**/*
