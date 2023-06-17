@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_16_200021) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_16_215025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,12 +30,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_200021) do
 
   create_table "item_ingredients", force: :cascade do |t|
     t.bigint "item_id", null: false
-    t.string "ingredient_type", null: false
     t.bigint "ingredient_id", null: false
+    t.string "ingredient_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ingredient_type", "ingredient_id"], name: "index_item_ingredients_on_ingredient"
-    t.index ["ingredient_type", "ingredient_id"], name: "index_item_ingredients_on_ingredient_type_and_ingredient_id"
+    t.index ["ingredient_id", "item_id"], name: "index_item_ingredients_on_ingredient_id_and_item_id", unique: true
+    t.index ["ingredient_id"], name: "index_item_ingredients_on_ingredient_id"
     t.index ["item_id"], name: "index_item_ingredients_on_item_id"
   end
 
@@ -44,6 +44,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_200021) do
     t.string "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_items_on_order_id"
+  end
+
+  create_table "order_promotion_codes", id: false, force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "promotion_code_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id", "promotion_code_id"], name: "index_order_promotion_codes_on_order_id_and_promotion_code_id", unique: true
+    t.index ["order_id"], name: "index_order_promotion_codes_on_order_id"
+    t.index ["promotion_code_id"], name: "index_order_promotion_codes_on_promotion_code_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -63,6 +75,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_200021) do
     t.index ["code"], name: "index_promotion_codes_on_code", unique: true
   end
 
+  add_foreign_key "item_ingredients", "ingredients"
   add_foreign_key "item_ingredients", "items"
+  add_foreign_key "items", "orders"
+  add_foreign_key "order_promotion_codes", "orders"
+  add_foreign_key "order_promotion_codes", "promotion_codes"
   add_foreign_key "orders", "discount_codes"
 end
