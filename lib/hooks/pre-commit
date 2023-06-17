@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Retrieve the list of staged files
-files=$(git diff --name-only --cached)
+files=$(git diff --name-only --cached --diff-filter=d)
 
 # Run RuboCop on the staged files
 rubocop ${files[@]} --fail-fast
