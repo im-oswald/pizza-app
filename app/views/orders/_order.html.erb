@@ -1,0 +1,14 @@
+<div class="flex flex-wrap">
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <div>ID: <%= order.uuid %></div>
+      <div>Created: <%= format_timestamp(order.created_at) %></div>
+      <div>Promotion Codes: <%= render 'promotion_codes', promotion_codes: order.promotion_codes %></div>
+      <div>Discount Codes: <%= render 'discount_code', discount_code: order.discount_code %></div>
+      <div>Total Price: </div>
+    </div>
+    <div>
+      Items: <%= render 'order_items', items: order.items %>
+    </div>
+  </div>
+</div>
