@@ -1,5 +1,3 @@
-<ul>
-  <% items.each do |item| %>
-    <%= render 'order_item', item: item %>
-  <% end %>
+<ul class='list-decimal font-sm text-sm'>
+  <%= render collection: items, partial: 'order_item', as: :item %>
 </ul>

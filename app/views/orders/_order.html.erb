@@ -1,16 +1,35 @@
-<div class="flex flex-wrap" id="order_<%= order.uuid %>">
-  <div class="grid grid-cols-2 gap-4">
-    <div>
-      <div>ID: <%= order.uuid %></div>
-      <div>Created: <%= format_timestamp(order.created_at) %></div>
-      <div>Promotion Codes: <%= render 'promotion_codes', promotion_codes: order.promotion_codes %></div>
-      <div>Discount Codes: <%= render 'discount_code', discount_code: order.discount_code %></div>
-      <div>Total Price: </div>
-
-      <%= button_to 'Complete', order_path(order.id), method: :patch, remote: true, form: { "data-turbo-frame": "order_#{order.uuid}" } %>
+<div class='card relative m-10 p-10 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700' id='order_<%= order.uuid %>'>
+  <div class='card-content'>
+    <div class='text-center'>
+      <div>
+        <%= render 'shared/tag', color: 'green', value: order.status.titleize %>
+      </div>
+      <div class='p-2 text-lg'>
+        <%= render 'shared/tag', color: 'orange', value: "Order ID: #{order.uuid}" %>
+      </div>
+      <div class='text-xs'>Created at <%= format_timestamp(order.created_at) %></div>
     </div>
-    <div>
-      Items: <%= render 'order_items', items: order.items %>
+    <div class='p-2 grid grid-cols-2 gap-4 text-left'>
+      <div>
+        <div class='p-2 m-2'>
+          <div class='text-sm font-bold'>Promotion Codes</div>
+          <%= render 'promotion_codes', promotion_codes: order.promotion_codes %>
+        </div>
+        <div class='p-2 m-2'>
+          <div class='text-sm font-bold'>Discount Codes</div>
+          <%= render 'discount_code', discount_code: order.discount_code %>
+        </div>
+      </div>
+      <div>
+        <div class='p-2 m-2'>
+          <div class='text-sm font-bold'>Item Details</div>
+          <%= render 'order_items', items: order.items %>
+        </div>
+      </div>
     </div>
+    <div class='font-semibold h-[70px] text-xl'>Total Price: € <%= '0' %></div>
+  </div>
+  <div class='card-footer absolute bottom-0 left-0 right-0 flex justify-center'>
+    <%= button_to 'Complete', order_path(order.id), method: :patch, remote: true, form: { 'data-turbo-frame': "order_#{order.uuid}" }, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-5' %>
   </div>
 </div>
