@@ -1,37 +1,259 @@
-# .rubocop.yml
-require: rubocop-rails
-
+require:
+- rubocop-rails
 AllCops:
+  SuggestExtensions: false
+  NewCops: enable
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'test/**/*'
+  - bin/**/*
+  - tmp/**/*
+  - coverage/**/*
+  - db/schema.rb
+  - db/migrate/*.rb
+  - node_modules/**/*
+  - vendor/bundle/**/*
+Bundler/OrderedGems:
+  Enabled: false
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+Layout/CommentIndentation:
+  Enabled: false
+Layout/DotPosition:
+  Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+Layout/EmptyLines:
+  Enabled: true
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: false
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+Layout/FirstHashElementIndentation:
+  Enabled: false
+Layout/FirstParameterIndentation:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
+Layout/LeadingCommentSpace:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+Layout/MultilineBlockLayout:
+  Enabled: false
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+Layout/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+Layout/SpaceAroundOperators:
+  Enabled: true
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+Layout/SpaceInLambdaLiteral:
+  Enabled: false
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Layout/TrailingEmptyLines:
+  Enabled: false
+Lint/AmbiguousOperator:
+  Enabled: false
+Lint/DuplicateBranch:
+  Enabled: false
+Lint/EmptyBlock:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: false
+Lint/SymbolConversion:
+  Enabled: false  
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+Lint/UnusedBlockArgument:
+  Enabled: false
+Lint/UnusedMethodArgument:
+  Enabled: false
+Lint/UselessAssignment:
+  Enabled: false
+Lint/EmptyConditionalBody:
+  Enabled: false
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Lint/UselessMethodDefinition:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Max: 300
+  Exclude:
+    - spec/**/*.rb
+    - config/routes.rb
+Metrics/BlockNesting:
+  Max: 6
+Metrics/ClassLength:
+  Max: 1000
+Metrics/CyclomaticComplexity:
+  Max: 100
+Metrics/MethodLength:
+  Max: 250
+  Exclude:
+    - app/models/tag.rb
+Metrics/ModuleLength:
+  Max: 500
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Max: 100
+Naming/AccessorMethodName:
+  Enabled: false
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+Naming/PredicateName:
+  Enabled: false
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+  Exclude:
+    - config/initializers/**/*.rb
+    - app/lib/data/common.rb
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: false
+Rails/Date:
+  Enabled: false
+Rails/DynamicFindBy:
+  Enabled: false
+Rails/FilePath:
+  Enabled: false
+Rails/FindBy:
+  Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+Rails/RenderInline:
+  Enabled: false  
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/UnknownEnv:
+  Enabled: false
+Rails/RedundantForeignKey:
+  Enabled: false
+Rails/HasManyOrHasOneDependent:
+  Enabled: true
+Rails/InverseOf:
+  Enabled: true
+Rails/OutputSafety:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false  
+Style/BlockDelimiters:
+  Enabled: false
+Style/CaseLikeIf:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/CommentAnnotation:
+  Enabled: false  
+Style/ConditionalAssignment:
+  Enabled: false
+Style/DateTime:
+  Enabled: false
 Style/Documentation:
   Enabled: false
-Style/SymbolArray:
-  Exclude:
-    - config/initializers/filter_parameter_logging.rb
+Style/DoubleNegation:
+  Enabled: false
+Style/EmptyLiteral:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/FloatDivision:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Style/GlobalStdStream:
-  Exclude:
-    - config/environments/production.rb
-Style/ClassAndModuleChildren:
-  Exclude:
-    - test/test_helper.rb
-Layout/SpaceInsidePercentLiteralDelimiters:
-  Exclude:
-    - Gemfile
-Metrics/MethodLength:
-  Exclude:
-    - bin/helpers/docker.rb
-    - app/controllers/demo_controller.rb
-Lint/UselessAssignment:
-  Exclude:
-    - bin/helpers/puma.rb
-    - bin/helpers/sidekiq.rb
-Metrics/BlockLength:
-  Exclude:
-    - config/environments/development.rb
-
-Rails:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/HashAsLastArrayItem:
+  EnforcedStyle: no_braces
+Style/IdenticalConditionalBranches:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: false
+Style/MultilineBlockChain:
+  Enabled: false
+Style/MultilineIfModifier:
+  Enabled: false
+Style/Next:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/OptionalBooleanParameter:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/Proc:
+  Enabled: false
+Style/QuotedSymbols:
+  Enabled: false
+Style/RedundantBegin:
+  Enabled: false
+Style/RedundantRegexpEscape:
+  Enabled: false
+Style/RedundantReturn:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/RescueStandardError:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/SymbolProc:
+  Enabled: false
+Style/TernaryParentheses:
+  Enabled: false
+Style/WhileUntilDo:
+  Enabled: false
+Style/WhileUntilModifier:
+  Enabled: false
+Style/WordArray:
+  Enabled: false
+Style/KeywordParametersOrder:
+  Enabled: false
+Style/RedundantAssignment:
+  Enabled: false
+Style/FormatString:
+  Enabled: false
+Style/ExponentialNotation:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/CombinableLoops:
+  Enabled: false
+Style/NumericLiteralPrefix:
   Enabled: false
