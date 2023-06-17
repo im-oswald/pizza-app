@@ -1,4 +1,4 @@
-<div class="flex flex-wrap">
+<div class="flex flex-wrap" id="order_<%= order.uuid %>">
   <div class="grid grid-cols-2 gap-4">
     <div>
       <div>ID: <%= order.uuid %></div>
@@ -6,6 +6,8 @@
       <div>Promotion Codes: <%= render 'promotion_codes', promotion_codes: order.promotion_codes %></div>
       <div>Discount Codes: <%= render 'discount_code', discount_code: order.discount_code %></div>
       <div>Total Price: </div>
+
+      <%= button_to 'Complete', order_path(order.id), method: :patch, remote: true, form: { "data-turbo-frame": "order_#{order.uuid}" } %>
     </div>
     <div>
       Items: <%= render 'order_items', items: order.items %>
