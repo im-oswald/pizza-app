@@ -56,6 +56,9 @@ group :development, :test do
 
   # Code linting
   gem 'rubocop-rails', '2.17.4', require: false
+
+  # N+1 Query detector
+  gem 'bullet', '~> 6.1', require: false
 end
 
 group :development do
