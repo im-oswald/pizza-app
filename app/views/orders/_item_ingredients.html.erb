@@ -1,0 +1,9 @@
+<ul>
+  <% if item.add_ingredients.any? %>
+    <li>Add: <%= item.add_ingredients.map(&:name).join(', ') %></li>
+  <% end %>
+
+  <% if item.remove_ingredients.any? %>
+    <li>Remove: <%= item.remove_ingredients.map(&:name).join(', ') %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,5 @@
+<% if promotion_codes.any? %>
+  <%= promotion_codes.map(&:code).join(', ') %>
+<% else %>
+  -
+<% end %>
