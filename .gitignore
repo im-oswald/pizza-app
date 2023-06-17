@@ -36,3 +36,7 @@
 
 # Ignore env file
 .env
+
+# assets bulds and keep files
+/app/assets/builds/*
+!/app/assets/builds/.keep
