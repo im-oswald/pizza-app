@@ -11,4 +11,6 @@ class Order < ApplicationRecord
   has_many :items, dependent: :destroy
   has_and_belongs_to_many :promotion_codes, join_table: :order_promotion_codes
   belongs_to :discount_code, optional: true
+
+  scope :active, -> { where(status: statuses[:open]) }
 end
