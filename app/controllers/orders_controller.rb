@@ -8,7 +8,11 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order.update!(order_params)
+    @order.completed!
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.update("order_#{@order.uuid}") }
+    end
   end
 
   private
