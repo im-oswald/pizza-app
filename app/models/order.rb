@@ -12,5 +12,7 @@ class Order < ApplicationRecord
   has_and_belongs_to_many :promotion_codes, join_table: :order_promotion_codes
   belongs_to :discount_code, optional: true
 
-  scope :active, -> { where(status: statuses[:open]) }
+  scope :active, lambda {
+                   includes(:promotion_codes, :discount_code, items: %i[add_ingredients remove_ingredients]).where(status: statuses[:open])
+                 }
 end
