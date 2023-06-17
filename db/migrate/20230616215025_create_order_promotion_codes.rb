@@ -7,6 +7,6 @@ class CreateOrderPromotionCodes < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :order_promotion_codes, [:order_id, :promotion_code_id], unique: true
+    add_index :order_promotion_codes, %i[order_id promotion_code_id], unique: true
   end
 end

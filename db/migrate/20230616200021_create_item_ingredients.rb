@@ -8,6 +8,6 @@ class CreateItemIngredients < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :item_ingredients, [:ingredient_id, :item_id], unique: true
+    add_index :item_ingredients, %i[ingredient_id item_id], unique: true
   end
 end
