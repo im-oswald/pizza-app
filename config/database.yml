@@ -1,6 +1,6 @@
 default: &default
   adapter:  postgresql
-  host:     <%= ENV['DB_HOST'] || 'db' %>
+  host:     <%= ENV['DB_HOST'] || '127.0.0.1' %>
   port:     <%= ENV['DB_PORT'] || 5432 %>
   pool:     <%= ENV['DB_POOL'] || 5 %>
   encoding: unicode
