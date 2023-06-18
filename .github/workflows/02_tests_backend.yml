@@ -41,7 +41,9 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
-        run: bin/rails db:create db:schema:load
+        run: |
+          psql -U postgres -d pizza_app_test -c 'CREATE EXTENSION IF NOT EXISTS pgcrypto;'
+          bin/rails db:create db:schema:load
 
       - name: Run Backend Tests
         env:
