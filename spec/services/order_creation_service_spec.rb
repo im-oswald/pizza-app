@@ -31,7 +31,7 @@ RSpec.describe OrderCreationService do
       allow(Order).to receive(:find_by).with(uuid: '316c6832-e038-4599-bc32-2b0bf1b9f1c1').and_return(nil)
       allow(subject).to receive(:create_data_from_raw).with(data[0]).and_return(order)
       allow(order).to receive(:save!)
-    
+
       described_class.call(data)
     end
 
