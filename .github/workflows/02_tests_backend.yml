@@ -20,7 +20,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
           --cpu-shares=512
-          --entrypoint=sh -c "psql -U $$POSTGRES_USER -c 'CREATE EXTENSION IF NOT EXISTS pgcrypto;' && /docker-entrypoint.sh postgres"
 
     steps:
       - name: Checkout Repo
@@ -32,13 +31,17 @@ jobs:
           ruby-version: 3.2.2
           bundler-cache: true
 
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config set without 'development'
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
+
       - name: Setup Database
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
-        run: |
-          bin/rails db:create
-          bin/rails db:migrate    
+        run: rails db:create db:schema:load
 
       - name: Run Backend Tests
         env:
