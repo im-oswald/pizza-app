@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       pizza-database:
-        image: postgres:12.6-alpine
+        image: postgres:13.3-alpine
         env:
           POSTGRES_DB: pizza_app_test
           POSTGRES_USER: postgres
@@ -43,6 +43,7 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
         run: |
+          docker exec -i pizza-database psql -U postgres -d pizza_app_test -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
           echo "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" | PGPASSWORD=postgres psql -U postgres -h localhost -p 5432 -d pizza_app_test
           bundle exec rake db:test:prepare
           bin/rails db:create db:migrate
