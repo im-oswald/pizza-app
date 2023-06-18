@@ -4,7 +4,7 @@
   </h1>
   <hr />
   <% @orders.in_groups_of(2, false) do |chunk| %>
-    <div class='flex flex-wrap w-half'>
+    <div class='flex flex-wrap'>
       <% chunk.each do |order| %>
         <%= render 'order', order: order %>
       <% end %>

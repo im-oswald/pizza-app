@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   before_save :calculate_total_price
 
   scope :active, lambda {
-                   includes(:promotion_codes, :discount_code, items: %i[add_ingredients remove_ingredients])
+                   includes(:promotion_codes, :discount_code, items: %i[add_ingredients remove_ingredients item_ingredients])
                      .where(status: statuses[:open])
                  }
 

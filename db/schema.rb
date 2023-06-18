@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_215025) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
     t.string "status", default: "open"
     t.bigint "discount_code_id"
     t.datetime "created_at", null: false
