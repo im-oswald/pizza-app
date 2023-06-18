@@ -46,9 +46,17 @@ jobs:
           bundle exec rake db:test:prepare
           bin/rails db:create db:schema:load
 
+      - name: Enable uuid-ossp extension
+        env:
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
+        run: |
+          echo "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" | psql $DATABASE_URL
+
       - name: Run Backend Tests
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
         continue-on-error: false
-        run: bundle exec rspec -f documentation
+        run: |
+          bin/rails db:migrate
+          bundle exec rspec -f documentation
