@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2023_06_16_215025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "discount_codes", force: :cascade do |t|
     t.string "code", null: false
