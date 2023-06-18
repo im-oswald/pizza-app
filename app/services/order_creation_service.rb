@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class SyncOrderException < StandardError
+class OrderCreationService < StandardError
 end
 
-class SyncOrderService
+class OrderCreationService
   def initialize(data)
     @data = data
   end
@@ -21,7 +21,7 @@ class SyncOrderService
       end
     end
   rescue StandardError => e
-    raise SyncOrderException, "Error seeding orders: #{e.message}"
+    raise OrderCreationService, "Error seeding orders: #{e.message}"
   end
 
   private

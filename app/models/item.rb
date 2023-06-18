@@ -13,5 +13,7 @@ class Item < ApplicationRecord
   belongs_to :order
   has_many :item_ingredients, dependent: :destroy
   has_many :add_ingredients, -> { ItemIngredient.add_ingredients }, through: :item_ingredients, source: :ingredient
-  has_many :remove_ingredients, -> { ItemIngredient.remove_ingredients }, through: :item_ingredients, source: :ingredient
+  has_many :remove_ingredients, lambda {
+                                  ItemIngredient.remove_ingredients
+                                }, through: :item_ingredients, source: :ingredient
 end
