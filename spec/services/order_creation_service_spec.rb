@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe OrderCreationService do
@@ -40,7 +42,9 @@ RSpec.describe OrderCreationService do
 
       expect(Order).to receive(:transaction).and_raise(StandardError.new(error_message))
 
-      expect { described_class.call(data) }.to raise_error(OrderCreationServiceException, "Error seeding orders: #{error_message}")
+      expect do
+        described_class.call(data)
+      end.to raise_error(OrderCreationServiceException, "Error seeding orders: #{error_message}")
     end
   end
 
