@@ -12,15 +12,8 @@ jobs:
           POSTGRES_DB: pizza_app_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          DB_HOST: 127.0.0.1
         ports: 
           - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-          --cpu-shares=512
 
     steps:
       - name: Checkout Repo
@@ -43,8 +36,8 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
         run: |
-          bundle exec rake db:test:prepare
-          bin/rails db:create db:migrate
+          bin/rails db:create
+          bin/rails db:migrate
 
       - name: Run Backend Tests
         env:
