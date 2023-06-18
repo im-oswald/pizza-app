@@ -57,8 +57,14 @@ group :development, :test do
   # Code linting
   gem 'rubocop-rails', '2.17.4', require: false
 
-  # N+1 Query detector
-  gem 'bullet', '~> 6.1', require: false
+  # Unit testing
+  gem 'rspec-rails', '~> 5.0'
+
+  # Data Mocking libraries
+  gem 'factory_bot_rails'
+
+  # Fake data generator
+  gem 'faker'
 end
 
 group :development do
@@ -73,6 +79,9 @@ group :development do
 
   # Code Quality Assessment
   gem 'rubycritic', '~> 4.6.0', require: false
+
+  # N+1 Query detector
+  gem 'bullet', '~> 7.0.7'
 end
 
 group :test do
@@ -82,4 +91,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0'
