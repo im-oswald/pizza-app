@@ -44,7 +44,7 @@ jobs:
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
         run: |
           bundle exec rake db:test:prepare
-          bin/rails db:create db:schema:load
+          bin/rails db:create db:migrate
 
       - name: Run Backend Tests
         env:
