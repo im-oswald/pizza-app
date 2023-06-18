@@ -1,4 +1,5 @@
-name: Tests - Backend
+name: Tests - Pull Request
+
 
 on: [push]
 
@@ -6,51 +7,37 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     services:
-      pizza-database:
-        image: postgres:13.3-alpine
-        env:
-          POSTGRES_DB: pizza_app_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          DB_HOST: 127.0.0.1
-        ports: 
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-          --cpu-shares=512
+      postgres:
+        image: postgres:15.3-alpine
+        volumes:
+          - postgres:/var/lib/postgresql/data
+        ports:
+          - 5434:5432
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Ruby
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.2
-          bundler-cache: true
 
-      - name: Install dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Build and Run Docker Compose
+        run: docker-compose up -d --build
+
+      - name: Wait for Database
         run: |
-          gem install bundler
-          bundle config set without 'development'
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
+          sleep 15
+          docker-compose exec -T db sh -c 'while ! pg_isready -q -h localhost -U postgres; do sleep 1; done'
 
-      - name: Setup Database
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
-        run: |
-          docker exec -i pizza-database psql -U postgres -d pizza_app_test -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
-          echo "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" | PGPASSWORD=postgres psql -U postgres -h localhost -p 5432 -d pizza_app_test
-          bundle exec rake db:test:prepare
-          bin/rails db:create db:migrate
+      - name: Set up Rails Application
+        run: docker-compose exec -T web bundle exec rails db:prepare
 
-      - name: Run Backend Tests
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
-        continue-on-error: false
-        run: bundle exec rspec -f documentation
+      - name: Run RSpec Tests
+        run: docker-compose exec -T web bundle exec rspec
