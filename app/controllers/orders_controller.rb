@@ -13,9 +13,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update("order_#{@order.uuid}",
-          partial: 'shared/flash_message',
-          locals: { message: 'Order completed successfully.', type: 'success' }
-        )
+                                                 partial: 'shared/flash_message',
+                                                 locals: { message: 'Order completed successfully.', type: 'success' })
       end
     end
   end
