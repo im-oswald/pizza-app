@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(50) }
 
@@ -18,7 +20,7 @@ RSpec.describe Ingredient, type: :model do
     end
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should have_many(:item_ingredients).dependent(:destroy) }
     it { should have_many(:items).through(:item_ingredients) }
   end
