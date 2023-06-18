@@ -43,6 +43,7 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
         run: |
+          echo "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" | psql -U postgres -h localhost -p 5432 -d pizza_app_test
           bundle exec rake db:test:prepare
           bin/rails db:create db:migrate
 
@@ -51,6 +52,4 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
         continue-on-error: false
-        run: |
-          bin/rails db:migrate
-          bundle exec rspec -f documentation
+        run: bundle exec rspec -f documentation
