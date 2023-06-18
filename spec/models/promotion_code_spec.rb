@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PromotionCode, type: :model do
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:code) }
 
     context 'validates uniqueness of code' do
@@ -17,7 +19,7 @@ RSpec.describe PromotionCode, type: :model do
     end
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should have_and_belong_to_many(:orders).join_table(:order_promotion_codes) }
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :item_ingredient do
     ingredient_type { ItemIngredient.ingredient_types.keys.sample }
