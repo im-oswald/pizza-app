@@ -24,6 +24,8 @@ scripts/db-seed.sh
 
 If you encounter any issues during the setup process, I recommend referring to a helpful resource that provides guidance on Docker setup for various environments. You can find detailed instructions and a set of useful scripts listed in the [Custom Scripts Guide](DOCKER.md) documentation.
 
+Incase of success you'll have the server up and running at [localhost:3000](https:/localhost:3000)
+
 
 ### Rubocop Rules
 [Rubocop](https://rubocop.org) linter rules configured in [.rubocop.yml](.rubocop.yml).
