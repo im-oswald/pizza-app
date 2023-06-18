@@ -38,6 +38,14 @@ jobs:
           bundle config set without 'development'
           bundle install --jobs 4 --retry 3 --path vendor/bundle
 
+      - name: Setup Database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pizza_app_test"
+        run: |
+          bundle exec rake db:test:prepare
+          bin/rails db:create db:migrate
+
       - name: Run Backend Tests
         env:
           RAILS_ENV: test
