@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :find_order, only: %i[update]
 
   def index
-    @orders = Order.active
+    @orders = Order.active.order(created_at: :desc)
   end
 
   def update
