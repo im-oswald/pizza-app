@@ -19,7 +19,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-          -c, --cpu-shares=512
+          --cpu-shares=512
           --entrypoint=sh -c "psql -U $$POSTGRES_USER -c 'CREATE EXTENSION IF NOT EXISTS pgcrypto;' && /docker-entrypoint.sh postgres"
 
     steps:
