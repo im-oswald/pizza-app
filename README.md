@@ -6,6 +6,8 @@ This is the code behind the Pizza App orders management system.
 - **Ruby 3.2.2**
 - **Rspec 5.0**
 - **PostgreSQL 14.7**
+- **Tailwind 2**
+- **Bundler 2.4.10**
 
 ### Project Setup
 Install [Docker](https://docs.docker.com/) for [Mac](https://docs.docker.com/desktop/install/mac-install/) or [Windows](https://docs.docker.com/desktop/install/windows-install/), then run:
