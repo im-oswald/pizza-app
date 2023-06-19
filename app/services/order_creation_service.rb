@@ -48,7 +48,7 @@ class OrderCreationService
 
   def create_items(raw_items, order)
     raw_items&.each do |raw_item|
-      item = Item.find_or_create_by!(
+      item = Item.create!(
         name: raw_item['name'],
         order:,
         size: raw_item['size']&.downcase
