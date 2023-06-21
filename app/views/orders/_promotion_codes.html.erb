@@ -1,0 +1,5 @@
+<% if promotion_codes.any? %>
+  <%= render collection: promotion_codes.pluck(:code), partial: 'shared/tag', as: :value, locals: { color: 'green' } %>
+<% else %>
+  <%= render 'shared/not_provided' %>
+<% end %>

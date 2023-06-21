@@ -1,0 +1,5 @@
+<% if discount_code %>
+  <%= render 'shared/tag', color: 'orange', value: discount_code.code %>
+<% else %>
+  <%= render 'shared/not_provided' %>
+<% end %>

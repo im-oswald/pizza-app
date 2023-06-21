@@ -1,0 +1,15 @@
+<ul>
+  <% if item.add_ingredients.any? %>
+    <li class='mt-2'>
+      <% item.add_ingredients.each do |ingredient| %>
+        <%= render partial: 'shared/add', locals: { value: ingredient.name } %>
+      <% end %>
+    </li>
+  <% end %>
+
+  <% if item.remove_ingredients.any? %>
+    <% item.remove_ingredients.each do |ingredient| %>
+      <%= render partial: 'shared/remove', locals: { value: ingredient.name } %>
+    <% end %>
+  <% end %>
+</ul>
