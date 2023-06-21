@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :item do
-    name { Faker::Food.dish }
+    name { %w[Margharita Tonno Salami].sample }
     size { Item.sizes.keys.sample }
 
     association :order, factory: :order, strategy: :create
