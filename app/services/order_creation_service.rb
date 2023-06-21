@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrderCreationServiceException < StandardError
+class OrderCreationException < StandardError
 end
 
 class OrderCreationService
@@ -21,7 +21,7 @@ class OrderCreationService
       end
     end
   rescue StandardError => e
-    raise OrderCreationServiceException, "Error seeding orders: #{e.message}"
+    raise OrderCreationException, "Error seeding orders: #{e.message}"
   end
 
   private
